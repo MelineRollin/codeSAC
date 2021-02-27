@@ -265,7 +265,7 @@ fin=False
 nbSteps=0
 sigma1=1.0
 sigma2=1.0
-batchSize=100
+batchSize=4
 warmingEpisodes=100
 logmin=-20
 logmax=2
@@ -341,7 +341,7 @@ for i in range(0, nbEpisodes):
         else:
             storage=True
             first=True
-        # storage=False
+        storage=False
         
         
         #compute targets for the Q functions
@@ -380,7 +380,6 @@ for i in range(0, nbEpisodes):
             stateAction[i]=state[i]
         for i in range(8,10):
             stateAction[i]=action[i-8]
-        Q1NN.output(stateAction)
         currentStateActionValue=Q1NN.LastLayerOutput[0]
         differences[0]=target-currentStateActionValue
         Q1NN.retropropagation(stateAction,differences,pas,storage)   
